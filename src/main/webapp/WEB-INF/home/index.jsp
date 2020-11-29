@@ -23,9 +23,9 @@
 </ul>
 
 
-<c:forEach var="test" items="${list}" varStatus="status" begin="1" end="10" step="1" >
+<c:forEach var="test" items="${list}" varStatus="status" begin="0" end="10" step="1" >
 	<ul>
-		<li>${status.index }</li>
+		<li>${status.index+1 }</li>
 		<li><a href="/test/${test.idx}">${test.title }</a></li>
 		<li>${test.writer }</li>
 		<li>${fn:substring(test.reg_date,0,10) }</li>
