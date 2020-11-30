@@ -1,0 +1,21 @@
+
+
+1. build.gradle 파일에 id 'eclipse' 추가
+
+
+
+	id 'eclipse'
+
+
+
+2. eclpse 프로젝트로 생성
+
+
+	gradlew eclipse
+	
+
+3. 폴더이름 바꾸기
+
+
+ 	.project 파일에 project 이름으로 폴더명을 변경한다  (폴더명이 다를 경우에만)
+ 	
