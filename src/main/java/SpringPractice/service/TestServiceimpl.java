@@ -1,5 +1,6 @@
 package SpringPractice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -44,6 +45,14 @@ public class TestServiceimpl implements TestService{
 	public void update(TestBoard testBoard) {
 		dao.findByIdx(testBoard.getIdx());
 		dao.save(testBoard);
+	}
+
+	@Transactional
+	@Override
+	public List<TestBoard> searchList(String keyward) {
+		List<TestBoard> list=dao.findByTitleContaining(keyward);
+	
+		return list;
 	}
 
 

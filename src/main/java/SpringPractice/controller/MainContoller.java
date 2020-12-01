@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import SpringPractice.entity.TestBoard;
@@ -70,6 +71,13 @@ public class MainContoller {
 	public String update(TestBoard testBoard) {
 		testService.update(testBoard);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/search.do")
+	public String search(@RequestParam(value = "keyward") String keyward, Model model) {
+		List<TestBoard> searchList = testService.searchList(keyward);
+		model.addAttribute("searchList", searchList);
+		return "index";
 	}
 	
 

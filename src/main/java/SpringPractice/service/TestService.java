@@ -16,6 +16,8 @@ public interface TestService {
 
 	void update(TestBoard testBoard);
 
+	List<TestBoard> searchList(String keyward);
+
 
 
 }
