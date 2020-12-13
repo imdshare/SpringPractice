@@ -45,6 +45,16 @@ public class TestBoard {
 	
 	@LastModifiedDate
 	private LocalDateTime edit_date;
+	
+	@Column
+	private String filePath;
+	
+	@Column
+	private String fileNm;
+	
+	@Column
+	private String fileId;
+	
 
 
 }

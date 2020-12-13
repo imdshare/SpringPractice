@@ -34,6 +34,9 @@ dependencies {
 	compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 	compile('javax.servlet:jstl:1.2')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	compile group: 'commons-io', name: 'commons-io', version: '2.7'
 
 
 
