@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,12 +34,16 @@
 	</ul>
 </c:forEach>
 
+<div class="pagging">
+	<c:forEach begin="${page.from }" end="${page.to }" var="item" step="1">
+				<a href="/${item }">${item }</a>
+	</c:forEach>
+</div>
 
-
-<form action="/search.do">
-	<input name="keyward" type="text" placeholder="검색어를 입력해주세요">
-	<button type="submit">검색</button>
-</form>
+<!-- <form action="/search.do"> -->
+<!-- 	<input name="keyward" type="text" placeholder="검색어를 입력해주세요"> -->
+<!-- 	<button type="submit">검색</button> -->
+<!-- </form> -->
 
 
 </body>

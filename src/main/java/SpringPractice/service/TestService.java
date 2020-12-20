@@ -2,13 +2,15 @@ package SpringPractice.service;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import SpringPractice.entity.TestBoard;
 
 public interface TestService {
 
 	void save(TestBoard testBoard);
 
-	List<TestBoard> getList();
+	ModelAndView getList(int page);
 
 	TestBoard findIdx(Long idx);
 

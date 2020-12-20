@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import SpringPractice.entity.TestBoard;
 import SpringPractice.service.TestService;
@@ -29,13 +30,12 @@ public class MainContoller {
 	TestService testService;
 	
 	
-	@GetMapping
-	public String home(Model model) {
-		List <TestBoard> list=testService.getList();
-		if(list != null)
-		model.addAttribute("list",list);
+	@GetMapping("/{page}")
+	public ModelAndView home(Model model, @PathVariable int page) {
+	ModelAndView mv =testService.getList(page);
+	mv.setViewName("index");
 	
-		return "index";
+		return mv;
 	}
 	
 	@RequestMapping("/test/write.do")
@@ -49,12 +49,12 @@ public class MainContoller {
 		String fileName=files.getOriginalFilename();
 		testBoard.setFileNm(fileName);
 		
-		ClassPathResource cr=new ClassPathResource("static/upload"); //bin에 저장됨
-		File dir=cr.getFile();
-		File dest=new File(dir,fileName);
-		files.transferTo(dest);
+//		ClassPathResource cr=new ClassPathResource("static/upload"); //bin�뿉 ���옣�맖
+//		File dir=cr.getFile();
+//		File dest=new File(dir,fileName);
+//		files.transferTo(dest);
 		testService.save(testBoard);
-		return "redirect:/";
+		return "redirect:/"+1;
 	}
 	
 	@GetMapping("/test/{idx}")
@@ -67,7 +67,7 @@ public class MainContoller {
 	@GetMapping("/delete/{idx}")
 	public String delete(@PathVariable Long idx) {
 		testService.delete(idx);
-		return "redirect:/";
+		return "redirect:/"+1;
 	}
 	
 
@@ -81,7 +81,7 @@ public class MainContoller {
 	@PostMapping("/update")
 	public String update(TestBoard testBoard) {
 		testService.update(testBoard);
-		return "redirect:/";
+		return "redirect:/"+1;
 	}
 	
 	@GetMapping("/search.do")
