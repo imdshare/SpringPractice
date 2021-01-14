@@ -47,6 +47,11 @@ function addReply(){
 	var comment = $("input[name='comment']").val();
 	var boardNo = "${detail.idx }";
 	var writerId = $("#writerId").val();
+
+	if(comment == ""){
+		alert('댓글 내용을 입력해주세요');
+		return;
+	}
 		
 	$.ajax({
 		  url : "/addReply"
