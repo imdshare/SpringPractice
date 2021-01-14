@@ -59,8 +59,17 @@ public class MainContoller {
 		return "redirect:/home/"+1;
 	}
 	
-	@GetMapping("/test/{idx}")
-	public String detail(@PathVariable Long idx, Model model) {
+//	@GetMapping("/test/{idx}")
+//	public String detail(@PathVariable Long idx, Model model) {
+//		TestBoard detail=testService.findIdx(idx);
+//		model.addAttribute("detail", detail);
+//		return "/board/detail";
+//	}
+	
+	@GetMapping("/test")
+	public String detail(HttpServletRequest req, Model model) {
+		String param = req.getParameter("idx");
+		Long idx = Long.parseLong(param);
 		TestBoard detail=testService.findIdx(idx);
 		model.addAttribute("detail", detail);
 		return "/board/detail";
@@ -120,7 +129,7 @@ public class MainContoller {
 		Long ddd = null;
 		if(boardNo != null){
 			ddd = Long.parseLong(boardNo);
-		};
+		}
 		List<Comment> list =testService.getReply(ddd);
 		model.addAttribute("replyList", list);
 		 return "/board/replyList";
