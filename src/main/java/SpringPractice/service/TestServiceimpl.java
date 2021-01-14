@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import SpringPractice.dao.ReplyDao;
 import SpringPractice.dao.TestDao;
+import SpringPractice.entity.Comment;
 import SpringPractice.entity.TestBoard;
 import SpringPractice.util.PageInfo;
 
@@ -24,6 +26,9 @@ public class TestServiceimpl implements TestService{
 	
 	@Autowired
 	TestDao dao;
+	
+	@Autowired
+	ReplyDao replyDao;
 
 	@Override
 	public void save(TestBoard testBoard) {
@@ -37,11 +42,8 @@ public class TestServiceimpl implements TestService{
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 	
 		Page<TestBoard> pageInfo=dao.findAll(pageable);
-		System.out.println(pageInfo + "pageInfo??????????????");
 		List<TestBoard> list=pageInfo.getContent();
-		System.out.println("list?????????" + list);
 		PageInfo p = new PageInfo(page, pageInfo.getTotalPages());
-		System.out.println("p??????????"  + p);
 //		List<TestBoard> list =dao.findAll();
 		
 //		model.addAttribute("list", list);
@@ -74,6 +76,17 @@ public class TestServiceimpl implements TestService{
 		List<TestBoard> list=dao.findByTitleContaining(keyward);
 	
 		return list;
+	}
+
+	@Override
+	public void addReply(Comment comment) {
+		System.out.println("여기는 서비스 impl");
+		replyDao.save(comment);
+	}
+
+	@Override
+	public List<Comment> getReply(Long idx) {
+		return replyDao.findByBoardNo(idx);
 	}
 
 

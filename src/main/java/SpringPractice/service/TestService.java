@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import SpringPractice.entity.Comment;
 import SpringPractice.entity.TestBoard;
 
 public interface TestService {
@@ -20,6 +21,10 @@ public interface TestService {
 	void update(TestBoard testBoard);
 
 	List<TestBoard> searchList(String keyward);
+
+	void addReply(Comment comment);
+
+	List<Comment> getReply(Long idx);
 
 
 

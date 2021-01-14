@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import SpringPractice.entity.Comment;
 import SpringPractice.entity.TestBoard;
 import SpringPractice.service.TestService;
 
@@ -90,5 +93,37 @@ public class MainContoller {
 //		return "index";
 //	}
 	
+	
+	@PostMapping("/addReply")
+	public String addReply(HttpServletRequest req) {
+		String boardNo = req.getParameter("boardNo");
+		Long ddd = null;
+		if(boardNo != null){
+			 ddd = Long.parseLong(boardNo);
+		}
+		String content = req.getParameter("comment");
+		String writerId = req.getParameter("writerId");
+		
+
+		//ajax의 데이터는 request로 넘긴다. 그래서 Entity에 받아온 값으로 세팅해줘야함
+		Comment comment = new Comment();
+		comment.setBoardNo(ddd);
+		comment.setComment(content);
+		comment.setWriterId(writerId);
+		testService.addReply(comment);
+		 return "/board/replyList";
+	}
+	
+	@PostMapping("/getReply")
+	public String getReply(Model model, HttpServletRequest req) {
+		String boardNo = req.getParameter("boardNo");
+		Long ddd = null;
+		if(boardNo != null){
+			ddd = Long.parseLong(boardNo);
+		};
+		List<Comment> list =testService.getReply(ddd);
+		model.addAttribute("replyList", list);
+		 return "/board/replyList";
+	}
 
 }
