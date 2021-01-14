@@ -12,17 +12,7 @@
 <body>
 <h1>Test Home</h1>
 <a href="/test/write.do">글쓰기</a>
-
-<ul>
-	<li>번호</li>
-	<li>제목</li>
-	<li>작성자</li>
-	<li>등록일</li>
-	<li>수정일</li>
-</ul>
-
-
-
+<a href="/home/1">리스트</a>
 
 <c:forEach var="test" items="${list}" varStatus="status" begin="0" end="10" step="1" >
 	<ul>
@@ -36,7 +26,7 @@
 
 <div class="pagging">
 	<c:forEach begin="${page.from }" end="${page.to }" var="item" step="1">
-				<a href="/${item }">${item }</a>
+				<a href="/home/${item }">${item }</a>
 	</c:forEach>
 </div>
 
