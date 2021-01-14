@@ -2,6 +2,7 @@ package SpringPractice.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import SpringPractice.entity.TestBoard;
@@ -10,7 +11,7 @@ public interface TestService {
 
 	void save(TestBoard testBoard);
 
-	ModelAndView getList(int page);
+	List<TestBoard> getList(int page, Model model );
 
 	TestBoard findIdx(Long idx);
 

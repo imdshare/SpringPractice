@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import SpringPractice.dao.TestDao;
@@ -30,7 +31,7 @@ public class TestServiceimpl implements TestService{
 	}
 
 	@Override
-	public ModelAndView getList(int page) {
+	public List<TestBoard> getList(int page, Model model) {
 		Sort sort = Sort.by(Direction.DESC,"idx");
 		int size = 3;
 		Pageable pageable=PageRequest.of(page-1, size, sort);
@@ -43,10 +44,9 @@ public class TestServiceimpl implements TestService{
 		System.out.println("p??????????"  + p);
 //		List<TestBoard> list =dao.findAll();
 		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("list", list);
-		mv.addObject("page", p);
-		return mv;
+//		model.addAttribute("list", list);
+		model.addAttribute("page", p);
+		return list ;
 	}
 
 	@Override
@@ -75,6 +75,8 @@ public class TestServiceimpl implements TestService{
 	
 		return list;
 	}
+
+
 
 
 

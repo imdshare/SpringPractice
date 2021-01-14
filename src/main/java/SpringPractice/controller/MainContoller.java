@@ -30,12 +30,11 @@ public class MainContoller {
 	TestService testService;
 	
 	
-	@GetMapping("/{page}")
-	public ModelAndView home(Model model, @PathVariable int page) {
-	ModelAndView mv =testService.getList(page);
-	mv.setViewName("index");
-	
-		return mv;
+	@GetMapping("/home/{page}")
+	public String home(Model model, @PathVariable int page) {
+		 List<TestBoard> list =testService.getList(page, model);
+		 model.addAttribute("list", list);
+		return "index";
 	}
 	
 	@RequestMapping("/test/write.do")
@@ -54,7 +53,7 @@ public class MainContoller {
 //		File dest=new File(dir,fileName);
 //		files.transferTo(dest);
 		testService.save(testBoard);
-		return "redirect:/"+1;
+		return "redirect:/home/"+1;
 	}
 	
 	@GetMapping("/test/{idx}")
@@ -67,7 +66,7 @@ public class MainContoller {
 	@GetMapping("/delete/{idx}")
 	public String delete(@PathVariable Long idx) {
 		testService.delete(idx);
-		return "redirect:/"+1;
+		return "redirect:/home/"+1;
 	}
 	
 
@@ -81,15 +80,15 @@ public class MainContoller {
 	@PostMapping("/update")
 	public String update(TestBoard testBoard) {
 		testService.update(testBoard);
-		return "redirect:/"+1;
+		return "redirect:/home/"+1;
 	}
 	
-	@GetMapping("/search.do")
-	public String search(@RequestParam(value = "keyward") String keyward, Model model) {
-		List<TestBoard> searchList = testService.searchList(keyward);
-		model.addAttribute("searchList", searchList);
-		return "index";
-	}
+//	@GetMapping("/search.do")
+//	public String search(@RequestParam(value = "keyward") String keyward, Model model) {
+//		List<TestBoard> searchList = testService.searchList(keyward);
+//		model.addAttribute("searchList", searchList);
+//		return "index";
+//	}
 	
 
 }
